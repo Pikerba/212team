@@ -1,88 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>212 TEAM</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Courier New', Courier, monospace;
-            color: #ff0000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
-        .image-container img {
-            width: 750px; 
-            height: auto;
-            border: 2px solid #ff0000; 
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 255, 0.7); 
-        }
-        .info {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #ff0000; 
-            text-shadow: 0px 0px 8px #ff0000, 0px 0px 15px #ff0000, 0px 0px 25px #ff0000; 
-            letter-spacing: 4.5px; 
-            white-space: pre-wrap;
-        }
-        .text {
-            margin-top: 20px;
-            font-size: 3em; 
-            color: #ff1d1d; 
-            text-shadow: 0px 0px 8px #ff1212, 0px 0px 15px #fb1111, 0px 0px 25px #ff1111; 
-            letter-spacing: 4.5px; 
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>212 TEAM</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Courier New', Courier, monospace;
+      color: #ff0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    .image-container img {
+      width: 750px; 
+      height: auto;
+      border: 2px solid #ff0000; 
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 255, 0.7); 
+    }
+    .info {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #ff0000; 
+      text-shadow: 0px 0px 8px #ff0000, 0px 0px 15px #ff0000, 0px 0px 25px #ff0000; 
+      letter-spacing: 4.5px; 
+      white-space: pre-wrap;
+    }
+    .text {
+      margin-top: 20px;
+      font-size: 3em; 
+      color: #ff1d1d; 
+      text-shadow: 0px 0px 8px #ff1212, 0px 0px 15px #fb1111, 0px 0px 25px #ff1111; 
+      letter-spacing: 4.5px; 
+    }
+  </style>
 </head>
 <body>
-    <div class="image-container">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTBjNzFlcm9lM29tbmkxNm5kcXQ5MHMwMmsyb2t4bWthajBwdms4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q6xuxUhCgCNpsbfhaP/giphy.gif" alt="Discord Image">
-    </div>
+  <div class="image-container">
+    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTBjNzFlcm9lM29tbmkxNm5kcXQ5MHMwMmsyb2t4bWthajBwdms4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q6xuxUhCgCNpsbfhaP/giphy.gif" alt="Discord Image">
+  </div>
 
-    <!-- Music (starts muted, auto-unmutes on first click) -->
-    <audio id="bg-music" autoplay loop muted>
-        <source src="https://pikerba.github.io/212team/aa.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Music (hidden, autoplay, loop, NO controls) -->
+  <audio autoplay loop id="bg-music" style="display:none;">
+    <source src="https://pikerba.github.io/212team/aa.mp3" type="audio/mpeg">
+  </audio>
 
-    <div class="text">Hacked By 212 Team <3 </div>
-    <div class="info" id="ip-info">
-        <strong>IP: <span id="ip"></span></strong><br>
-        <span><strong>City:</strong> <span id="city"></span></span><br>
-        <span><strong>Region:</strong> <span id="region"></span></span><br>
-        <span><strong>Country:</strong> <span id="country"></span></span><br>
-        <span><strong>Location:</strong> <span id="loc"></span></span><br>
-        <span><strong>Organization:</strong> <span id="org"></span></span><br>
-        <span><strong>Timezone:</strong> <span id="timezone"></span></span>
-    </div>
-    <div class="text">212 TEAM EVERYWHERE : discord.gg/genz212</div>
+  <div class="text">Hacked By 212 Team <3 </div>
+  <div class="info" id="ip-info"></div>
+  <div class="text">212 TEAM EVERYWHERE : discord.gg/genz212</div>
 
-    <script>
-        // IP info fetch
-        fetch('https://ipinfo.io/json')
-        .then(response => response.json())
-        .then(data => {
-            delete data.readme;
-            const infoDiv = document.getElementById('ip-info');
-            infoDiv.textContent = JSON.stringify(data, null, 2);
-        });
+  <script>
+    // Fetch IP info
+    fetch('https://ipinfo.io/json')
+    .then(response => response.json())
+    .then(data => {
+      delete data.readme;
+      const infoDiv = document.getElementById('ip-info');
+      infoDiv.textContent = JSON.stringify(data, null, 2);
+    });
 
-        // Unmute music on first click anywhere
-        document.addEventListener("click", () => {
-            const music = document.getElementById("bg-music");
-            if (music.muted) {
-                music.muted = false;
-                music.play().catch(err => console.log("Autoplay blocked:", err));
-            }
-        }, { once: true });
-    </script>
+    // Try to force play on load
+    window.addEventListener("load", () => {
+      const music = document.getElementById("bg-music");
+      music.play().catch(err => console.log("Autoplay may be blocked:", err));
+    });
+  </script>
 </body>
 </html>
