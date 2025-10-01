@@ -18,6 +18,7 @@
             height: 100vh;
             flex-direction: column;
             text-align: center;
+            cursor: pointer; /* show users they can click */
         }
         .image-container img {
             width: 750px; 
@@ -48,26 +49,25 @@
         <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTBjNzFlcm9lM29tbmkxNm5kcXQ5MHMwMmsyb2t4bWthajBwdms4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q6xuxUhCgCNpsbfhaP/giphy.gif" alt="Discord Image">
     </div>
 
-    <!-- Fixed audio -->
-    <audio controls autoplay loop>
+    <!-- Audio element -->
+    <audio id="bg-music" controls loop>
         <source src="aa.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <div class="text">Hacked By 212 Team <3 </div>
-    <div class="info" id="ip-info">
-        <strong>IP: <span id="ip"></span></strong><br>
-        <span><strong>City:</strong> <span id="city"></span></span><br>
-        <span><strong>Region:</strong> <span id="region"></span></span><br>
-        <span><strong>Country:</strong> <span id="country"></span></span><br>
-        <span><strong>Location:</strong> <span id="loc"></span></span><br>
-        <span><strong>Organization:</strong> <span id="org"></span></span><br>
-        <span><strong>Timezone:</strong> <span id="timezone"></span></span>
-    </div>
+    <div class="info" id="ip-info"></div>
     <div class="text">212 TEAM EVERYWHERE : discord.gg/genz212</div>
 
     <script>
-         fetch('https://ipinfo.io/json')
+        // Start music on first click
+        document.addEventListener("click", () => {
+            const music = document.getElementById("bg-music");
+            music.play().catch(err => console.log("Autoplay blocked:", err));
+        }, { once: true });
+
+        // Fetch visitor info
+        fetch('https://ipinfo.io/json')
         .then(response => response.json())
         .then(data => {
             delete data.readme;
